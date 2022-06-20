@@ -1,0 +1,5 @@
+{
+    "in": "/home/jyao/validate_fastqc_multiqc_nf2/fastq/*.fastq.gz",
+    "validate": true,
+    "output_dur": "nf_results"
+}
