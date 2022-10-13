@@ -6,7 +6,7 @@ nextflow.enable.dsl=2
 
 process validatefastq {
     cpus 1
-    memory 2.GB
+    memory 4.GB
     errorStrategy 'ignore'
     //publishDir params.out, mode: 'copy', overwrite: true
 
@@ -27,7 +27,7 @@ process validatefastq {
 process fastqc {
 
     cpus 1
-    memory 1.GB
+    memory 2.GB
     errorStrategy 'ignore'
     //publishDir "${params.publish_dir}", mode: "copy", overwrite: true, enabled: params.publish_dir
     publishDir params.root_output_dir, mode: 'copy', overwrite: true
