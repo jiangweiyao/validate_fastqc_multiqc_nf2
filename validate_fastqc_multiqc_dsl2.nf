@@ -6,11 +6,10 @@ nextflow.enable.dsl=2
 
 process validatefastq {
     cpus 1
-    memory 4.GB
     errorStrategy  { task.attempt <= maxRetries  ? 'retry' : 'ignore' }
     maxRetries 3
 
-    memory { 8.GB * task.attempt * task.attempt }
+    memory { 4.GB * task.attempt * task.attempt }
     //publishDir params.out, mode: 'copy', overwrite: true
 
 
