@@ -9,12 +9,10 @@ process validatefastq {
     errorStrategy  { task.attempt <= maxRetries  ? 'retry' : 'ignore' }
     maxRetries 3
 
-    memory { 8.GB * task.attempt * task.attempt }
+    memory { 8.GB * task.attempt }
     //publishDir params.out, mode: 'copy', overwrite: true
 
 
-
-    //Note to self: specifying the file name literally coerces the input file into that name. It doesn't select files matching pattern of the literal.
     input:
     file(fastq)
 
@@ -29,9 +27,10 @@ process validatefastq {
 process fastqc {
 
     cpus 1
-    memory 2.GB
-    errorStrategy 'ignore'
-    //publishDir "${params.publish_dir}", mode: "copy", overwrite: true, enabled: params.publish_dir
+    errorStrategy  { task.attempt <= maxRetries  ? 'retry' : 'ignore' }
+    maxRetries 3
+
+    memory { 4.GB * task.attempt }
     publishDir params.root_output_dir, mode: 'copy', overwrite: true
 
     //Note to self: specifying the file name literally coerces the input file into that name. It doesn't select files matching pattern of the literal.
