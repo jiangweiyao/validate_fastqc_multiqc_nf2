@@ -9,7 +9,7 @@ process validatefastq {
     errorStrategy  { task.attempt <= maxRetries  ? 'retry' : 'ignore' }
     maxRetries 3
 
-    memory { 4.GB * task.attempt * task.attempt }
+    memory { 8.GB * task.attempt * task.attempt }
     //publishDir params.out, mode: 'copy', overwrite: true
 
 
