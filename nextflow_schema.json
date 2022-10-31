@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://raw.githubusercontent.com/jiangweiyao/validate_fastqc_multiqc_nf2/master/nextflow_schema.json",
+    "title": "fastqc multiqc pipeline parameters",
+    "description": "A simple interface",
+    "type": "object",
+    "definitions": {
+        "Options": {
+            "title": "Input/output options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Define where the pipeline should find input data and save output data.",
+            "required": [
+                "in",
+				"root_output_dir"
+            ],
+            "properties": {
+                "in": {
+                    "type": "string",
+                    "fa_icon": "fas fa-dna",
+                    "description": "Input FastQ files.",
+                    "help_text": "Use this to specify the location of your Insert FastQ files."
+                },
+                "outdir": {
+                    "type": "string",
+					"fa_icon": "fas fa-folder-open",
+                    "description": "The output directory where the results will be saved."
+				}
+			}
+		}
+	},
+	"allOf": [
+        {
+            "$ref": "#/definitions/Options"
+        }
+    ]
+}
