@@ -21,7 +21,7 @@
                     "description": "Input FastQ files.",
                     "help_text": "Use this to specify the location of your Insert FastQ files."
                 },
-                "outdir": {
+                "root_output_dir": {
                     "type": "string",
 					"fa_icon": "fas fa-folder-open",
                     "description": "The output directory where the results will be saved."
