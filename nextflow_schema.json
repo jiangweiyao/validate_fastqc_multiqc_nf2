@@ -12,7 +12,7 @@
             "description": "Define where the pipeline should find input data and save output data.",
             "required": [
                 "in",
-				"root_output_dir"
+		"root_output_dir"
             ],
             "properties": {
                 "in": {
@@ -27,7 +27,13 @@
                     "description": "The output directory where the results will be saved."
 				}
 			}
-		}
+		},
+                "validate": {
+                    "type": "boolean",
+                    "description": "Run files through fastq-utils before fastqc.",
+                    "fa_icon": "fas fa-align-center",
+                    "help_text": "Use for checking if file exists or is a valid fastq file."
+                }
 	},
 	"allOf": [
         {

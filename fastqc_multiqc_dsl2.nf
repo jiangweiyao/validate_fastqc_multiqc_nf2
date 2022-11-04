@@ -7,17 +7,18 @@ nextflow.enable.dsl=2
 process fastqc {
 
     cpus 1
-    memory 1.GB
-    errorStrategy 'ignore'
-    publishDir "${params.publish_dir}", mode: "copy", overwrite: true
-    //publishDir params.out, mode: 'copy', overwrite: true
+    errorStrategy  { task.attempt <= maxRetries  ? 'retry' : 'ignore' }
+    maxRetries 3
+
+    memory { 2.GB * task.attempt }
+    publishDir params.root_output_dir, mode: 'copy', overwrite: true
 
     //Note to self: specifying the file name literally coerces the input file into that name. It doesn't select files matching pattern of the literal.
     input:
-    file(fastq) 
- 
+    tuple val(state), file(fastq)
+
     output:
-    file "*_fastqc.{zip,html}" 
+    file "*_fastqc.{zip,html}"
     """
     fastqc ${fastq}
     """
@@ -27,8 +28,8 @@ process fastqc {
 process multiqc {
     cpus 2
     memory 2.GB
-    publishDir "${params.publish_dir}", mode: "copy", overwrite: true
-    //publishDir params.out, mode: 'copy', overwrite: true
+    //publishDir "${params.publish_dir}", mode: "copy", overwrite: true, enabled: params.publish_dir
+    publishDir params.root_output_dir, mode: 'copy', overwrite: true
 
     input:
     file(reports)
@@ -40,6 +41,7 @@ process multiqc {
     multiqc $reports
     """
 }
+
 
 workflow fastqc_multiqc_pipeline {
     take: fastq_file
