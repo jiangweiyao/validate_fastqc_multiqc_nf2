@@ -15,7 +15,7 @@ process fastqc {
 
     //Note to self: specifying the file name literally coerces the input file into that name. It doesn't select files matching pattern of the literal.
     input:
-    tuple val(state), file(fastq)
+    file(fastq)
 
     output:
     file "*_fastqc.{zip,html}"
